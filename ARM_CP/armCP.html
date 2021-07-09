@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="UTF-8" >
+    <title>Robot Control Page</title>
+    <link   rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
+   <meta charset="utf-8">
+  <title>control panel</title>
+
+  <style>
+      body {
+        height: 100vh;
+        background: linear-gradient(300deg,#005b0e, #023f28,#a42102, #015157, #700301);
+        background-size: 400% 400%;
+        animation: gradient 25s ease infinite;
+    }
+    #header-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 12vh;
+        font-family: 'Raleway', sans-serif;
+        border-radius: 0 0 18px 18px;
+        color: rgba(255, 255, 255, 0.945);
+        /* black for browsers which cannot support rgba */
+        background-color: #000 !important;
+        /* opacity for supported browsers */
+        background-color: #222324e1 !important;
+    }
+    .p{
+      color: white;
+    }
+    .range-wrap{    
+      width: 100%;
+      height: auto;
+      position: relative;
+      margin: 0 auto 3rem;
+      flex-wrap: wrap;
+    }
+    .window-center {
+        position: relative; 
+        height: 97%; 
+        width: 60%; 
+        margin-left: 20%; 
+        margin-right: 20%;
+        padding: 0px;
+        border: solid #292b2c 1px; 
+        border-radius: 15px; 
+        box-shadow: 0 9px #999;
+        overflow: hidden !important;
+    }
+    .btn-custom {
+        cursor: pointer;
+        outline: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+    }
+    .btn-custom:hover {background-color: #2e6da4}
+    input[type="range"] {
+   -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #white;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  border-radius: 20px;}
+.bubble {
+  background: #2e6da4;
+  color: white;
+  padding: 3px 9px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 4px;
+  background: #2e6da4;
+  top: -3px;
+  left: 50%;
+}
+
+  </style>
+<body>
+
+  <div id="load_updates"> </div>
+  <form action="db_connection.php" method="post">
+<div class="container">
+    <form1>
+        <div class="jumbotron">
+            <h1 class="display-4">Robot Arm Control Panel</h1>
+            <p class="lead">Slide to control</p>
+            <p class="lead">
+            </p>
+            
+        </div>
+    
+
+<div class="range-wrap">
+   <p style="color: white;">Servo 1</p>
+  <input type="range" name="s1" class="range" min="0" max="180" value="90" onchange="show_value1(this.value);" >
+  <output class="bubble"></output>
+</div>
+<div class="range-wrap">
+   <p style="color: white;">Servo 2</p>
+  <input type="range" name="s2" class="range" min="0" max="180" value="90" onchange="show_value2(this.value);">
+  <output class="bubble"></output>
+</div>
+<div class="range-wrap">
+   <p style="color: white;">Servo 3</p>
+  <input type="range" name="s3" class="range"  min="0" max="180" value="90" onchange="show_value3(this.value);">
+  <output class="bubble"></output>
+</div>
+<div class="range-wrap">
+   <p style="color: white;">Servo 4</p>
+  <input type="range" name="s4" class="range" min="0" max="180" value="90" onchange="show_value4(this.value);">
+  <output class="bubble"></output>
+</div>
+<div class="range-wrap">
+   <p  style="color: white;">Servo 5</p>
+  <input type="range" name="s5" class="range" min="0" max="180" value="90" onchange="show_value5(this.value);">
+  <output class="bubble"></output>
+</div>
+<div class="range-wrap">
+   <p style="color: white;">Servo 6</p>
+  <input type="range" name="s6" class="range" min="0" max="180" value="90" onchange="show_value6(this.value);">
+  <output class="bubble"></output>
+</div>
+<button type="submit" name="start" value="submit">start</button>
+</form>
+
+
+
+  <script>
+const allRanges = document.querySelectorAll(".range-wrap");
+allRanges.forEach(wrap => {
+  const range = wrap.querySelector(".range");
+  const bubble = wrap.querySelector(".bubble");
+  var valuey = range.value;
+
+  range.addEventListener("input", () => {
+    setBubble(range, bubble);
+  });
+  setBubble(range, bubble);
+});
+
+function setBubble(range, bubble) {
+  const val = range.value;
+  const min = range.min ? range.min : 0;
+  const max = range.max ? range.max : 100;
+  const newVal = Number(((val - min) * 100) / (max - min));
+  bubble.innerHTML = val;
+  bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+}
+     function show_value1(x)
+{document.getElementById("slider_value1").innerHTML=x;}
+     function show_value2(x)
+{document.getElementById("slider_value2").innerHTML=x;}
+    function show_value3(x)
+{document.getElementById("slider_value3").innerHTML=x;}
+     function show_value4(x)
+{document.getElementById("slider_value4").innerHTML=x;}
+    function show_value5(x)
+{document.getElementById("slider_value5").innerHTML=x;}
+     function show_value6(x)
+{document.getElementById("slider_value6").innerHTML=x;}
+</script>
+
+</form>
+ </head>
+</html>

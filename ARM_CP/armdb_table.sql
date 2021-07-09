@@ -1,0 +1,1 @@
+CREATE TABLE `armcp` ( `id` int(11) NOT NULL, `s1` int(180) NOT NULL, `s2` int(180) NOT NULL, `s3` int(180) NOT NULL, `s4` int(180) NOT NULL, `s5` int(180) NOT NULL, `s6` int(180) NOT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
